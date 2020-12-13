@@ -6,25 +6,33 @@
 	<thead>
 		<tr>
 			<th></th>
-			@for (int i = 0; i < columns; i++)
+			@for (int i = 1; i <= columns; i++)
 			{
 				<th>
-					@Convert.ToChar(i + 65)
+					@Convert.ToChar(i + 65 - 1)
 				</th>
 			}
 		</tr>
 	</thead>
 	<tbody>
-		@for (int i = 0; i < rows; i++)
+		@for (int i = 1; i <= rows; i++)
 		{
-			<tr>
-				<th>@(i + 1)</th>
+		<tr>
+			<th>@i</th>
 
-				@for (int j = 0; j < columns; j++)
+
+			@for (int j = 0; j < columns; j++)
+			{
+				@if (i == 2 || i == 7)
+				{
+					<td><Pawn IsWhite="@(i == 7)"></Pawn></td>
+				}
+				else
 				{
 					<td></td>
 				}
-			</tr>
+			}
+		</tr>
 		}
 	</tbody>
 </table>

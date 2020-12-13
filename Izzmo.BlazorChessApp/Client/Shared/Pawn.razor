@@ -1,0 +1,8 @@
+﻿<img src="/images/pawn-@(Color).svg" alt="Pawn, @Color" />
+
+@code {
+	[Parameter]
+	public bool IsWhite { get; set; }
+
+	public string Color => IsWhite ? "white" : "black";
+}

@@ -1,28 +1,55 @@
 ﻿@inherits TestComponentBase
 @using Izzmo.BlazorChessApp.Client.Pages
+@using AngleSharp.Html.Dom
 
-<Fixture Test="ChessBoardRendersCorrectAmountOfColumns">
+<Fixture Test="ChessBoardRendersStartingBoard">
 	<ComponentUnderTest>
 		<ChessBoard />
 	</ComponentUnderTest>
 
 	@code
 	{
-		void ChessBoardRendersCorrectAmountOfColumns(Fixture fixture)
+		void ChessBoardRendersStartingBoard(Fixture fixture)
 		{
 			var board = fixture.GetComponentUnderTest<ChessBoard>();
 
-			var rows = board.FindAll("tbody tr");
+			VerifyPawnsColor(board);
+			VerifyEmptySquares(board);
+		}
 
-			Assert.Equal(8, rows.Count);
+		IElement GetElement(IRenderedComponent<ChessBoard> board, char column, int row)
+		{
+			int columnIndex = Convert.ToInt32(column - 65);
+			var index = (8 * (row - 1)) + columnIndex;
+			var square = board.FindAll($"tbody td")[index];
 
-			foreach (var row in rows)
+			return square;
+		}
+
+		void VerifyPawnsColor(IRenderedComponent<ChessBoard> board)
+		{
+			var charList = new char[8] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+			foreach (var c in charList)
 			{
-				var columns = row.GetElementsByTagName("td");
-				Assert.Equal(8, columns.Length);
-			}
+				var whitePawnText = ((IHtmlImageElement)GetElement(board, c, 7).GetElementsByTagName("img")[0]).AlternativeText;
+				var blackPawnText = ((IHtmlImageElement)GetElement(board, c, 2).GetElementsByTagName("img")[0]).AlternativeText;
 
-			Assert.Equal(8, rows.Count);
+				Assert.Equal("Pawn, white", whitePawnText);
+				Assert.Equal("Pawn, black", blackPawnText);
+			}
+		}
+
+		void VerifyEmptySquares(IRenderedComponent<ChessBoard> board)
+		{
+			var charList = new char[8] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+			foreach (var c in charList)
+			{
+				for (int i = 3; i <= 6; i++)
+				{
+					var square = (IHtmlElement)GetElement(board, c, i);
+					Assert.Equal(0, square.InnerHtml.Length);
+				}
+			}
 		}
 	}
 </Fixture>
