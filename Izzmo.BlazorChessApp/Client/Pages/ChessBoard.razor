@@ -3,11 +3,23 @@
 <h1>Chess</h1>
 
 <table class="chess-board">
-	<thead></thead>
+	<thead>
+		<tr>
+			<th></th>
+			@for (int i = 0; i < columns; i++)
+			{
+				<th>
+					@Convert.ToChar(i + 65)
+				</th>
+			}
+		</tr>
+	</thead>
 	<tbody>
 		@for (int i = 0; i < rows; i++)
 		{
 			<tr>
+				<th>@(i + 1)</th>
+
 				@for (int j = 0; j < columns; j++)
 				{
 					<td></td>
