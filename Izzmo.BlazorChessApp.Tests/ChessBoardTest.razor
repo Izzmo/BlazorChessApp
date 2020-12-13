@@ -13,7 +13,12 @@
 		{
 			var board = fixture.GetComponentUnderTest<ChessBoard>();
 
-			VerifyPawnsColor(board);
+			VerifyPawns(board);
+			VerifyRooks(board);
+			//VerifyKnights(board);
+			//VerifyBishops(board);
+			//VerifyQueens(board);
+			//VerifyKings(board);
 			VerifyEmptySquares(board);
 		}
 
@@ -26,10 +31,10 @@
 			return square;
 		}
 
-		void VerifyPawnsColor(IRenderedComponent<ChessBoard> board)
+		void VerifyPawns(IRenderedComponent<ChessBoard> board)
 		{
-			var charList = new char[8] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
-			foreach (var c in charList)
+			var columnList = new char[8] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+			foreach (var c in columnList)
 			{
 				var whitePawnText = ((IHtmlImageElement)GetElement(board, c, 7).GetElementsByTagName("img")[0]).AlternativeText;
 				var blackPawnText = ((IHtmlImageElement)GetElement(board, c, 2).GetElementsByTagName("img")[0]).AlternativeText;
@@ -41,14 +46,71 @@
 
 		void VerifyEmptySquares(IRenderedComponent<ChessBoard> board)
 		{
-			var charList = new char[8] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
-			foreach (var c in charList)
+			var columnList = new char[8] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+			foreach (var c in columnList)
 			{
 				for (int i = 3; i <= 6; i++)
 				{
 					var square = (IHtmlElement)GetElement(board, c, i);
 					Assert.Equal(0, square.InnerHtml.Length);
 				}
+			}
+		}
+
+		void VerifyKings(IRenderedComponent<ChessBoard> board)
+		{
+			var whiteText = ((IHtmlImageElement)GetElement(board, 'E', 8).GetElementsByTagName("img")[0]).AlternativeText;
+			var blackText = ((IHtmlImageElement)GetElement(board, 'E', 1).GetElementsByTagName("img")[0]).AlternativeText;
+
+			Assert.Equal("King, white", whiteText);
+			Assert.Equal("King, black", blackText);
+		}
+
+		void VerifyQueens(IRenderedComponent<ChessBoard> board)
+		{
+			var whiteText = ((IHtmlImageElement)GetElement(board, 'D', 8).GetElementsByTagName("img")[0]).AlternativeText;
+			var blackText = ((IHtmlImageElement)GetElement(board, 'D', 1).GetElementsByTagName("img")[0]).AlternativeText;
+
+			Assert.Equal("Queen, white", whiteText);
+			Assert.Equal("Queen, black", blackText);
+		}
+
+		void VerifyRooks(IRenderedComponent<ChessBoard> board)
+		{
+			var columnList = new char[2] { 'A', 'H' };
+			foreach (var c in columnList)
+			{
+				var whiteText = ((IHtmlImageElement)GetElement(board, c, 8).GetElementsByTagName("img")[0]).AlternativeText;
+				var blackText = ((IHtmlImageElement)GetElement(board, c, 1).GetElementsByTagName("img")[0]).AlternativeText;
+
+				Assert.Equal("Rook, white", whiteText);
+				Assert.Equal("Rook, black", blackText);
+			}
+		}
+
+		void VerifyKnights(IRenderedComponent<ChessBoard> board)
+		{
+			var columnList = new char[2] { 'B', 'G' };
+			foreach (var c in columnList)
+			{
+				var whiteText = ((IHtmlImageElement)GetElement(board, c, 8).GetElementsByTagName("img")[0]).AlternativeText;
+				var blackText = ((IHtmlImageElement)GetElement(board, c, 1).GetElementsByTagName("img")[0]).AlternativeText;
+
+				Assert.Equal("Knight, white", whiteText);
+				Assert.Equal("Knight, black", blackText);
+			}
+		}
+
+		void VerifyBishops(IRenderedComponent<ChessBoard> board)
+		{
+			var columnList = new char[2] { 'C', 'F' };
+			foreach (var c in columnList)
+			{
+				var whiteText = ((IHtmlImageElement)GetElement(board, c, 8).GetElementsByTagName("img")[0]).AlternativeText;
+				var blackText = ((IHtmlImageElement)GetElement(board, c, 1).GetElementsByTagName("img")[0]).AlternativeText;
+
+				Assert.Equal("Bishop, white", whiteText);
+				Assert.Equal("Bishop, black", blackText);
 			}
 		}
 	}

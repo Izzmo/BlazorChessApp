@@ -15,17 +15,29 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (int i = 1; i <= rows; i++)
+		@for (int row = 1; row <= rows; row++)
 		{
+			var isWhite = row == 7 || row == 8;
+
 		<tr>
-			<th>@i</th>
+			<th>@row</th>
 
-
-			@for (int j = 0; j < columns; j++)
+			@for (int col = 1; col <= columns; col++)
 			{
-				@if (i == 2 || i == 7)
+				@if (row == 2 || row == 7)
 				{
-					<td><Pawn IsWhite="@(i == 7)"></Pawn></td>
+					<td><Pawn IsWhite="@isWhite"></Pawn></td>
+				}
+				else if (row == 1 || row == 8)
+				{
+					if (col == 1 || col == 8)
+					{
+						<td><Rook IsWhite="@isWhite"></Rook></td>
+					}
+					else
+					{
+						<td></td>
+					}
 				}
 				else
 				{
