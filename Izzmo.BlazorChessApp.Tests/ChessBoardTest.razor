@@ -1,0 +1,28 @@
+﻿@inherits TestComponentBase
+@using Izzmo.BlazorChessApp.Client.Pages
+
+<Fixture Test="ChessBoardRendersCorrectAmountOfColumns">
+	<ComponentUnderTest>
+		<ChessBoard />
+	</ComponentUnderTest>
+
+	@code
+	{
+		void ChessBoardRendersCorrectAmountOfColumns(Fixture fixture)
+		{
+			var board = fixture.GetComponentUnderTest<ChessBoard>();
+
+			var rows = board.FindAll("tbody tr");
+
+			Assert.Equal(8, rows.Count);
+
+			foreach (var row in rows)
+			{
+				var columns = row.GetElementsByTagName("td");
+				Assert.Equal(8, columns.Length);
+			}
+
+			Assert.Equal(8, rows.Count);
+		}
+	}
+</Fixture>
