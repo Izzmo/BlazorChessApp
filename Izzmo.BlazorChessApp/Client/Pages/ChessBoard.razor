@@ -42,9 +42,13 @@
 					{
 						<td><Bishop IsWhite="@isWhite"></Bishop></td>
 					}
-					else
+					else if (col == 4)
 					{
-						<td></td>
+						<td><Queen IsWhite="@isWhite"></Queen></td>
+					}
+					else if (col == 5)
+					{
+						<td><King IsWhite="@isWhite"></King></td>
 					}
 				}
 				else
