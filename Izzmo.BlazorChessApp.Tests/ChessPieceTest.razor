@@ -1,0 +1,27 @@
+﻿@inherits TestComponentBase
+@using Izzmo.BlazorChessApp.Client.Shared
+@using AngleSharp.Html.Dom
+
+<Fixture Description="When a pawn is requested for move positions, then it should return positions"
+		 Test="WhenPawnIsRequestedForMovePositions">
+	<ComponentUnderTest>
+		<ChessPiece Type="@PieceType.Pawn" IsWhite="true" />
+	</ComponentUnderTest>
+	<Fragment>
+		<img src="/images/pawn-white.svg" alt="Pawn, white" />
+	</Fragment>
+
+	@code
+	{
+		void WhenPawnIsRequestedForMovePositions(Fixture fixture)
+		{
+			const PieceType pieceType = PieceType.Pawn;
+			var piece = fixture.GetComponentUnderTest<ChessPiece>();
+
+			var actualImage = piece.Find("img");
+			var expectedImage = fixture.GetFragment();
+
+			actualImage.MarkupMatches(expectedImage);
+		}
+	}
+</Fixture>

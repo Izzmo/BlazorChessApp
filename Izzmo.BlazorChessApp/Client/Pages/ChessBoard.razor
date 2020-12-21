@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Izzmo.BlazorChessApp.Shared
 
 <h1>Chess</h1>
 
@@ -15,9 +16,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (int row = 1; row <= rows; row++)
+		@for (int row = rows; row > 0; row--)
 		{
-			var isWhite = row == 7 || row == 8;
+			var isWhite = row == 1 || row == 2;
 
 		<tr>
 			<th>@row</th>
@@ -26,29 +27,29 @@
 			{
 				@if (row == 2 || row == 7)
 				{
-					<td><Pawn IsWhite="@isWhite"></Pawn></td>
+					<td><ChessPiece Type="PieceType.Pawn" IsWhite="@isWhite"></ChessPiece></td>
 				}
 				else if (row == 1 || row == 8)
 				{
 					if (col == 1 || col == 8)
 					{
-						<td><Rook IsWhite="@isWhite"></Rook></td>
+						<td><ChessPiece Type="PieceType.Rook" IsWhite="@isWhite"></ChessPiece></td>
 					}
 					else if (col == 2 || col == 7)
 					{
-						<td><Knight IsWhite="@isWhite"></Knight></td>
+						<td><ChessPiece Type="PieceType.Knight" IsWhite="@isWhite"></ChessPiece></td>
 					}
 					else if (col == 3 || col == 6)
 					{
-						<td><Bishop IsWhite="@isWhite"></Bishop></td>
+						<td><ChessPiece Type="PieceType.Bishop" IsWhite="@isWhite"></ChessPiece></td>
 					}
 					else if (col == 4)
 					{
-						<td><Queen IsWhite="@isWhite"></Queen></td>
+						<td><ChessPiece Type="PieceType.Queen" IsWhite="@isWhite"></ChessPiece></td>
 					}
 					else if (col == 5)
 					{
-						<td><King IsWhite="@isWhite"></King></td>
+						<td><ChessPiece Type="PieceType.King" IsWhite="@isWhite"></ChessPiece></td>
 					}
 				}
 				else

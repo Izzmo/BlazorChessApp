@@ -1,0 +1,15 @@
+﻿@using Izzmo.BlazorChessApp.Shared
+
+<div class="chess-piece chess-piece--@Type.ToString().ToLower()">
+	<img src="/images/@Type.ToString().ToLower()-@(Color).svg" alt="@Type.ToString(), @Color" />
+</div>
+
+@code {
+	[Parameter]
+	public PieceType Type { get; set; }
+
+	[Parameter]
+	public bool IsWhite { get; set; }
+
+	public string Color => IsWhite ? "white" : "black";
+}
