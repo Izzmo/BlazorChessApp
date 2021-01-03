@@ -9,7 +9,7 @@
 		}
 
 		public bool InStartingPosition { get; set; } = true;
-		
+
 		public PieceType Type { get; }
 		public PieceColor Color { get; }
 	}
