@@ -2,13 +2,24 @@
 @using Izzmo.BlazorChessApp.Client.Pages
 @using AngleSharp.Html.Dom
 
-<Fixture Test="ChessBoardRendersStartingBoard">
+<Fixture Setup="RegisterBoardState"
+		 Test="ChessBoardRendersStartingBoard">
 	<ComponentUnderTest>
 		<ChessBoard />
 	</ComponentUnderTest>
+	<Fragment>
+		<td class="possible-position"></td>
+	</Fragment>
 
 	@code
 	{
+		void RegisterBoardState(Fixture fixture)
+		{
+			var boardState = new BoardState();
+
+			fixture.Services.AddSingleton(boardState);
+		}
+
 		void ChessBoardRendersStartingBoard(Fixture fixture)
 		{
 			var board = fixture.GetComponentUnderTest<ChessBoard>();
@@ -20,6 +31,8 @@
 			VerifyQueens(board);
 			VerifyKings(board);
 			VerifyEmptySquares(board);
+
+			VerifyInitialPawnPositions(fixture, board);
 		}
 
 		IElement GetElement(IRenderedComponent<ChessBoard> board, char column, int row)
@@ -112,6 +125,20 @@
 				Assert.Equal("Bishop, white", whiteText);
 				Assert.Equal("Bishop, black", blackText);
 			}
+		}
+
+		void VerifyInitialPawnPositions(Fixture fixture, IRenderedComponent<ChessBoard> board)
+		{
+			var a2 = GetElement(board, 'a', 2);
+			var expectedSquare = fixture.GetFragment();
+
+			a2.Click();
+
+			var a3 = GetElement(board, 'a', 3);
+			var a4 = GetElement(board, 'a', 4);
+
+			a3.MarkupMatches(expectedSquare);
+			a4.MarkupMatches(expectedSquare);
 		}
 	}
 </Fixture>

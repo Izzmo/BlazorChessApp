@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using Izzmo.BlazorChessApp.Shared
+@inject BoardState BoardState
 
 <h1>Chess</h1>
 
@@ -25,37 +26,35 @@
 
 			@for (int col = 1; col <= columns; col++)
 			{
+				<td @onclick="PieceClicked">
 				@if (row == 2 || row == 7)
 				{
-					<td><ChessPiece Type="PieceType.Pawn" IsWhite="@isWhite"></ChessPiece></td>
+					<ChessPiece Type="PieceType.Pawn" IsWhite="@isWhite"></ChessPiece>
 				}
 				else if (row == 1 || row == 8)
 				{
 					if (col == 1 || col == 8)
 					{
-						<td><ChessPiece Type="PieceType.Rook" IsWhite="@isWhite"></ChessPiece></td>
+						<ChessPiece Type="PieceType.Rook" IsWhite="@isWhite"></ChessPiece>
 					}
 					else if (col == 2 || col == 7)
 					{
-						<td><ChessPiece Type="PieceType.Knight" IsWhite="@isWhite"></ChessPiece></td>
+						<ChessPiece Type="PieceType.Knight" IsWhite="@isWhite"></ChessPiece>
 					}
 					else if (col == 3 || col == 6)
 					{
-						<td><ChessPiece Type="PieceType.Bishop" IsWhite="@isWhite"></ChessPiece></td>
+						<ChessPiece Type="PieceType.Bishop" IsWhite="@isWhite"></ChessPiece>
 					}
 					else if (col == 4)
 					{
-						<td><ChessPiece Type="PieceType.Queen" IsWhite="@isWhite"></ChessPiece></td>
+						<ChessPiece Type="PieceType.Queen" IsWhite="@isWhite"></ChessPiece>
 					}
 					else if (col == 5)
 					{
-						<td><ChessPiece Type="PieceType.King" IsWhite="@isWhite"></ChessPiece></td>
+						<ChessPiece Type="PieceType.King" IsWhite="@isWhite"></ChessPiece>
 					}
 				}
-				else
-				{
-					<td></td>
-				}
+				</td>
 			}
 		</tr>
 		}
@@ -65,4 +64,9 @@
 @code {
 	int columns = 8;
 	int rows = 8;
+
+	void PieceClicked(MouseEventArgs e)
+	{
+		var positions = PiecePositioner.GetPieceMovePositions(BoardState, 'a', 2);
+	}
 }

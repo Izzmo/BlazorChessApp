@@ -9,12 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Izzmo.BlazorChessApp.Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Izzmo.BlazorChessApp.Shared", "Izzmo.BlazorChessApp\Shared\Izzmo.BlazorChessApp.Shared.csproj", "{69C78200-AA7B-48B1-B9AE-02F7EE334385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izzmo.BlazorChessApp.Tests", "Izzmo.BlazorChessApp.Tests\Izzmo.BlazorChessApp.Tests.csproj", "{1D56C371-9D41-4343-9B33-0FA5CB8BCB6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Izzmo.BlazorChessApp.Tests", "Izzmo.BlazorChessApp.Tests\Izzmo.BlazorChessApp.Tests.csproj", "{1D56C371-9D41-4343-9B33-0FA5CB8BCB6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50A2F47F-D82E-4843-AF58-4F8DB3494BB6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izzmo.BlazorChessApp.Shared.Tests", "Izzmo.BlazorChessApp.Shared.Tests\Izzmo.BlazorChessApp.Shared.Tests.csproj", "{A939FB05-1CE0-4AE8-BB55-EE75010695EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{1D56C371-9D41-4343-9B33-0FA5CB8BCB6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D56C371-9D41-4343-9B33-0FA5CB8BCB6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D56C371-9D41-4343-9B33-0FA5CB8BCB6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A939FB05-1CE0-4AE8-BB55-EE75010695EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A939FB05-1CE0-4AE8-BB55-EE75010695EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A939FB05-1CE0-4AE8-BB55-EE75010695EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A939FB05-1CE0-4AE8-BB55-EE75010695EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

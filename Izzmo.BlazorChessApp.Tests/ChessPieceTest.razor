@@ -15,7 +15,6 @@
 	{
 		void WhenPawnIsRequestedForMovePositions(Fixture fixture)
 		{
-			const PieceType pieceType = PieceType.Pawn;
 			var piece = fixture.GetComponentUnderTest<ChessPiece>();
 
 			var actualImage = piece.Find("img");

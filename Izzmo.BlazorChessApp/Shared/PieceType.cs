@@ -7,6 +7,7 @@
 		Knight,
 		Bishop,
 		Queen,
-		King
+		King,
+		None
 	}
 }
